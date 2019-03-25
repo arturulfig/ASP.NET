@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using AboutMe.Models;
 
 namespace AboutMe.Controllers
 {
@@ -15,9 +17,20 @@ namespace AboutMe.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var url = "https://feed.rssunify.com/5c7d5a6091910/rss.xml";
 
-            return View();
+            //var url = "https://news.google.com/rss?hl=pl&gl=PL&ceid=PL:pl";
+            var rss = XElement.Load(url);
+
+
+            var items = rss.Descendants("item").Select(item => new RssItem
+            {
+                Title = item.Element("title").Value,
+                PubDate = item.Element("pubDate").Value,
+                Description = item.Element("description").Value
+            });
+
+            return View(items);
         }
 
         public ActionResult Contact()

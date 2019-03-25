@@ -15,16 +15,19 @@ namespace AboutMe.Controllers
         {
             var url = "https://feed.rssunify.com/5c7d5a6091910/rss.xml";
 
+            //var url = "https://news.google.com/rss?hl=pl&gl=PL&ceid=PL:pl";
             var rss = XElement.Load(url);
 
-            var items = rss.Descendants("item").Select(item =>
-            new RssItem
+
+            var items = rss.Descendants("item").Select(item => new RssItem
             {
                 Title = item.Element("title").Value,
                 PubDate = item.Element("pubDate").Value,
                 Description = item.Element("description").Value
             });
+
             return View(items);
+
         }
     }
 }
