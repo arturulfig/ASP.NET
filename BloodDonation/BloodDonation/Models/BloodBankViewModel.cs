@@ -9,15 +9,14 @@ namespace BloodDonation.Models
     public class BloodBankViewModel
     {
         public BloodDonator donator;
+        public PagedList.IPagedList<BloodDonator> PagedDonators { get; set; }
         public Stats Statistics { get; set; }
         public List<BloodDonator> ListOfDonators { get; set; }
-
         public BloodBankViewModel()
         {
             ListOfDonators = new List<BloodDonator>();
             Statistics = new Stats();
         }
-
         public void addStats()
         {
             if (ListOfDonators != null)

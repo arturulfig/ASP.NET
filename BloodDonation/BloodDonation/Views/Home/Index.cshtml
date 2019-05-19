@@ -1,31 +1,100 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model BloodDonation.Models.BloodBankViewModel
+@using PagedList.Mvc;
+@using PagedList;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<h2>Blood Donation Center</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-4">@Html.DisplayFor(modelItem => Model.Statistics.TotalAmount)</div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalA_Plus)</div>
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalB_Plus)</div>
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalAB_Plus)</div>
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalZero_Plus)</div>
+            </div>
+            <div class="row">
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalA_Minus)</div>
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalB_Minus)</div>
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalAB_Minus)</div>
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalZero_Minus)</div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+
+
+<h2>Szczegółowa lista dawców krwii</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.VolumeOfBlood)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.DonationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.PersonalNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.FactorBlood)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.TypeOfBlood)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.PagedDonators)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VolumeOfBlood)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+
+<div id="container" style="margin-left: 20px">
+    <p></p>
+    <p></p>
+    <div class="pagination" style="margin-left: 400px">
+        Page @(Model.PagedDonators.PageCount < Model.PagedDonators.PageNumber ? 0 : Model.PagedDonators.PageNumber)
+        of @Model.PagedDonators.PageCount   @Html.PagedListPager(Model.PagedDonators, page => Url.Action("Index", new { page }))
     </div>
 </div>
