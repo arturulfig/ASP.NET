@@ -45,7 +45,8 @@ namespace BloodDonation.DAL
                     donator.FirstName = fields[1];
                     donator.LastName = fields[2];
                     donator.DonationDate = fields[3];
-                    donator.BloodVolume = float.Parse(fields[4]);
+                    int.TryParse(fields[4], out var x);
+                    donator.BloodVolume = x;
                     donator.TypeOfBlood = (BloodGroup)Convert.ToInt32(fields[5]);
                     donator.FactorBlood = (BloodFactor)Convert.ToInt32(fields[6]);
                     donator.Address = fields[7];
@@ -122,7 +123,7 @@ namespace BloodDonation.DAL
         {
             try
             {
-                if (Convert.ToInt32(amount) < 0)
+                if (Convert.ToDouble(amount) < 0)
                 {
                     validator = false;
                 }
@@ -178,7 +179,7 @@ namespace BloodDonation.DAL
                 validator = false;
             }
 
-            fields[3] = group;
+            fields[5] = group;
         }
         public void checkBloodFactor(string factor)
         {
@@ -191,7 +192,7 @@ namespace BloodDonation.DAL
             if (factor.Contains(factorMinus))
                 bloodFactor = BloodFactor.Minus.ToString();
             if (bloodFactor != null)
-                fields[4] = Convert.ToString(bloodFactor);
+                fields[6] = Convert.ToString(bloodFactor);
         }
     }
 }

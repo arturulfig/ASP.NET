@@ -10,38 +10,35 @@
 
 <h2>Blood Donation Center</h2>
 <div class="container">
-    <div class="row">
-        <div class="col-4">@Html.DisplayFor(modelItem => Model.Statistics.TotalAmount)</div>
-        <div class="col-8">
-            <div class="row">
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalA_Plus)</div>
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalB_Plus)</div>
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalAB_Plus)</div>
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalZero_Plus)</div>
+    <canvas id="myChart" style="max-width: 500px;"></canvas>
+
+    @*<div class="row">
+            <div class="col-4">@Html.DisplayFor(modelItem => Model.Statistics.TotalAmount)</div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalA_Plus)</div>
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalB_Plus)</div>
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalAB_Plus)</div>
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalZero_Plus)</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalA_Minus)</div>
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalB_Minus)</div>
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalAB_Minus)</div>
+                    <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalZero_Minus)</div>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalA_Minus)</div>
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalB_Minus)</div>
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalAB_Minus)</div>
-                <div class="col-3">@Html.DisplayFor(modelItem => Model.Statistics.TotalZero_Minus)</div>
-            </div>
-        </div>
-    </div>
+        </div>*@
+    <h2> CHART HERE</h2>
 </div>
 
 
 
-<h2>Szczegółowa lista dawców krwii</h2>
+<h2>Detailed list of blood donors</h2>
 
 
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.donator.VolumeOfBlood)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.donator.DonationDate)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.donator.FirstName)
         </th>
@@ -55,23 +52,22 @@
             @Html.DisplayNameFor(model => model.donator.Address)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.donator.BloodVolume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donator.DonationDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.donator.FactorBlood)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.donator.TypeOfBlood)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model.PagedDonators)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.VolumeOfBlood)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonationDate)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -83,6 +79,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodVolume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonationDate)
+            </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.FactorBlood)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfBlood)
             </td>
         </tr>
     }
