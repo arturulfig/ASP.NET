@@ -15,7 +15,7 @@ namespace BloodDonation.DAL
     public class DataAccessLayer
     {
         public List<BloodDonator> ListOfDonators;
-        private string csvName = "MOCK_DATA1.csv";
+        private string csvName = "MOCK_DATA4.csv";
         private string csvPath;
         private TextFieldParser parser;
         private string fullPath;
@@ -33,19 +33,19 @@ namespace BloodDonation.DAL
 
         public void CheckInputData(string[] fields)
         {
-            validator = true;
-            if (fields.Length != 8)
-            {
-                //AddDataToAnotherFile();
-            }
-            else
-            {
-                if (validator)
+            //validator = true;
+            //if (fields.Length != 8)
+            //{
+            //    //AddDataToAnotherFile();
+            //}
+            //else
+           // {
+                if (true)
                 {
-                    permission = false;
-                    isDataValid();
+                   // permission = false;
+                    //isDataValid();
 
-                    if (permission)
+                    if (true)
                     {
                         BloodDonator donator = new BloodDonator()
                         {
@@ -61,7 +61,7 @@ namespace BloodDonation.DAL
                         ListOfDonators.Add(donator);
                     }
                 }
-            }
+            //}
         }
 
         private void isDataValid()

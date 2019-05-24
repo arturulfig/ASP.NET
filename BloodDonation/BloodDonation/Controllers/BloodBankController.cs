@@ -17,8 +17,8 @@ namespace BloodDonation.Controllers
 
         public BloodBankController()
         {
-            _serverPath = Server.MapPath("/Data");
-            _dataAccessLayer = new DataAccessLayer(_serverPath);
+            //_serverPath = Server.MapPath("/Data");
+            _dataAccessLayer = new DataAccessLayer(@"C:\Users\Forestf\Desktop\sheffield\BloodDonation\BloodDonation\DataFiles\Data");
             _viewModel = new BloodBankViewModel();
         }
         // GET: BloodBank   
