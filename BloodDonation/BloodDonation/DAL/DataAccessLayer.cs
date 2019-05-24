@@ -12,10 +12,10 @@ using System.Text.RegularExpressions;
 
 namespace BloodDonation.DAL
 {
-    public class DataAccessLayer
+    public class DataAccessLayer : IDataAccess
     {
         public List<BloodDonator> ListOfDonators;
-        private string csvName = "MOCK_DATA4.csv";
+        private string csvName = "MOCK_DATA.csv";
         private string csvPath;
         private TextFieldParser parser;
         private string fullPath;
@@ -33,35 +33,28 @@ namespace BloodDonation.DAL
 
         public void CheckInputData(string[] fields)
         {
-            //validator = true;
-            //if (fields.Length != 8)
-            //{
-            //    //AddDataToAnotherFile();
-            //}
-            //else
-           // {
+            if (true)
+            {
+                permission = false;
+                isDataValid();
+
                 if (true)
                 {
-                   // permission = false;
-                    //isDataValid();
+                    BloodDonator donator = new BloodDonator();
 
-                    if (true)
-                    {
-                        BloodDonator donator = new BloodDonator()
-                        {
-                            FirstName = fields[0],
-                            LastName = fields[1],
-                            PersonalNumber = fields[2],
-                            TypeOfBlood = (BloodGroup)Enum.Parse(typeof(BloodGroup), fields[3]),
-                            FactorBlood = (BloodFactor)Enum.Parse(typeof(BloodFactor), fields[4]),
-                            BloodVolume = float.Parse(fields[5]),
-                            DonationDate = fields[6],
-                            Address = fields[7],
-                        };
-                        ListOfDonators.Add(donator);
-                    }
+                    donator.FirstName = fields[1];
+                    donator.LastName = fields[2];
+                    donator.DonationDate = fields[3];
+                    donator.BloodVolume = float.Parse(fields[4]);
+                    donator.TypeOfBlood = (BloodGroup)Convert.ToInt32(fields[5]);
+                    donator.FactorBlood = (BloodFactor)Convert.ToInt32(fields[6]);
+                    donator.Address = fields[7];
+                    donator.PersonalNumber = fields[8];
+
+
+                    ListOfDonators.Add(donator);
                 }
-            //}
+            }
         }
 
         private void isDataValid()
@@ -83,7 +76,7 @@ namespace BloodDonation.DAL
             try
             {
                 var parseDate = DateTime.Parse(date).ToShortDateString();
-                fields[6] = parseDate;
+                fields[3] = parseDate;
             }
             catch
             {
@@ -148,19 +141,24 @@ namespace BloodDonation.DAL
         public List<BloodDonator> LoadFromFile(string fullPath)
 
         {
+
             using (TextFieldParser parser = FileSystem.OpenTextFieldParser(fullPath, delimiters))
             {
                 while (!parser.EndOfData)
                 {
+
                     try
                     {
                         fields = parser.ReadFields();
+
                         CheckInputData(fields);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex);
                     }
+
+
                 }
             }
 
@@ -196,4 +194,4 @@ namespace BloodDonation.DAL
                 fields[4] = Convert.ToString(bloodFactor);
         }
     }
-}   
+}

@@ -127,6 +127,7 @@
     <Compile Include="Controllers\BloodBankController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\DataAccessLayer.cs" />
+    <Compile Include="DAL\IDataAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
